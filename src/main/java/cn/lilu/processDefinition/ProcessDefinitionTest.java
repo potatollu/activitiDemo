@@ -119,7 +119,7 @@ public class ProcessDefinitionTest {
 
 	/**
 	 * 查看流程图
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -177,6 +177,27 @@ public class ProcessDefinitionTest {
 			}
 		}
 	}
+
+	/**附加功能: 删除流程定义(删除key相同的所有不同版本的流程定义)*/
+	@Test
+	public void deleteProcessDefinitionByKey() {
+		//流程定义的Key
+		String processDefinitionKey = "helloworld";
+		//先试用流程定义的key查询流程定义,查询出所有的版本
+		List<ProcessDefinition> list = processEngine.getRepositoryService()
+				.createProcessDefinitionQuery()
+				.processDefinitionKey(processDefinitionKey)
+				.list();
+		//遍历,获取每个流程
+		if(list != null && list.size()>0){
+			for (ProcessDefinition pd : list) {
+				//获取部署ID
+				String deploymentId = pd.getDeploymentId();
+				processEngine.getRepositoryService().deleteDeployment(deploymentId,true);
+			}
+		}
+	}
+
 }
 
 
