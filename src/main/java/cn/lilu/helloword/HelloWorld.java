@@ -1,13 +1,13 @@
 package cn.lilu.helloword;
 
-import java.util.List;
-
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.junit.Test;
+
+import java.util.List;
 
 public class HelloWorld {
 
@@ -50,7 +50,7 @@ public class HelloWorld {
 	 */
 	@Test
 	public void findMyPersonalTask() {
-		String assignee = "范冰冰";
+		String assignee = "张三";
 		List<Task> list = processEngine.getTaskService()// 与正在执行的任务管理器相关的service
 				.createTaskQuery()// 创建任务查询对象
 				.taskAssignee(assignee)// 指定个人任务查询,指定办理人
